@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
+
 num_epochs=10
+
 def plot_loss(losses,val_losses):
 	plt.plot(range(num_epochs),
 		losses, color='red',
