@@ -31,7 +31,6 @@ def predict(i,j,h,w):
         cv2.rectangle(img2,(round(f[0][0][0].item()),round(f[0][0][1].item())),(round(f[0][0][2].item()),round(f[0][0][3].item())),(255,100,0),6)
         plt.imshow(img2)
         plt.title('class : '+str(f[0][0][5].item())+" \n confidence : "+str(f[0][0][4].item()))
-        plt.show()
     return f
 
 for i in range(0,h*10,h):
