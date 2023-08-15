@@ -1,0 +1,66 @@
+<!--AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Street View</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <img id="streetViewImg" style="max-width: 100%; max-height: 100vh;">
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+    <script>
+        let panorama;
+        let currentHeadingIndex = 0;
+        const headings = [0, 90, 180, 270];
+        const streetViewImg = document.getElementById('streetViewImg');
+
+        function initMap() {
+            // No need to create the "pano" element or set up StreetViewPanorama
+
+            // Adjust image size on window resize
+            window.addEventListener('resize', adjustImageSize);
+
+            // Display the first image immediately
+            displayNextStreetViewImage();
+
+            // Start displaying images with a timed interval after the first image
+            setInterval(displayNextStreetViewImage, 4000);
+        }
+
+        function adjustImageSize() {
+            streetViewImg.style.maxHeight = `${window.innerHeight}px`;
+            streetViewImg.style.maxWidth = '100%';
+        }
+
+        function displayNextStreetViewImage() {
+            const heading = headings[currentHeadingIndex];
+            const location = { lat: 11.3278082, lng: 77.7107402 };
+            const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=${window.innerWidth}x${window.innerHeight}&location=${location.lat},${location.lng}&heading=${heading}&pitch=0&fov=70&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg`;
+            streetViewImg.src = streetViewUrl;
+
+            // Increment the index to display the next image
+            currentHeadingIndex = (currentHeadingIndex + 1) % headings.length;
+        }
+    </script>
+
+    <script>
+        const headings = [0, 90, 180, 270];
+        let currentHeadingIndex = 0;
+        const streetViewImg = document.getElementById('streetViewImg');
+
+        function displayNextStreetViewImage() {
+            const heading = headings[currentHeadingIndex];
+            const location = { lat: 11.3278082, lng: 77.7107402 };
+            const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=800x600&location=${location.lat},${location.lng}&heading=${heading}&pitch=0&fov=120&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg`;
+            streetViewImg.src = streetViewUrl;
+
+            currentHeadingIndex = (currentHeadingIndex + 1) % headings.length;
+        }
+
+        // Start displaying images with a timed interval
+        setInterval(displayNextStreetViewImage, 4000);
+    </script>
+    </body>
+</html>
