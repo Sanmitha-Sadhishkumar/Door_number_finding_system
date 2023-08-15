@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.826); /* Dark background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .container {
+            background-color: #3C2A21; /* Darker container color */
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #5E4631; /* Border color */
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6); /* Shadow effect */
+            animation: popUpAnimation 0.5s ease-out; /* Apply the animation */
+            text-align: center;
+        }
+
+        /* Animation styles */
+        @keyframes popUpAnimation {
+            0% {
+                opacity: 0;
+                transform: translateY(20%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Additional animations and hover effects */
+        h1 {
+            color: #ffffff; /* Light text color */
+            font-family: 'Cambria', serif; /* Use Cambria font */
+            transition: color 0.3s;
+        }
+        
+        h1:hover {
+            color: #FF5733; /* Change text color on hover */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+
+        form:hover {
+            opacity: 0.8; /* Reduce opacity on hover */
+        }
+        
+        textarea {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #bdc3c7; /* Lighter border color */
+            border-radius: 5px;
+            resize: none;
+            background-color: #D5CEA3; /* Dark background color for textarea */
+            color: #000000; /* Dark text color */
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #FF5733; /* Change border color on focus */
+        }
+        
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #FF5733; /* Coral button color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #E64A19; /* Darker coral on hover */
+        }
+        .error-container {
+        display: none;
+        text-align: center;
+    }
+
+    .error-message {
+        color: white;
+        background-color: #e74c3c;
+        border: 2px solid #c0392b;
+        padding: 8px;
+        border-radius: 4px;
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 12px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+    }
+    .loading-container {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .loading-spinner {
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-top: 3px solid #FF5733; /* Change to a vibrant color */
+        border-radius: 50%;
+        width: 20px; /* Smaller size */
+        height: 20px; /* Smaller size */
+        animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    </style>
+    <script>
+        function navigateToImagePage() {
+            // Redirect to the image display page when the search button is clicked
+            window.location.href = "image.html";
+        }
+        function validateForm() {
+    var searchQuery = document.getElementById("search_query").value;
+    var errorContainer = document.getElementById("error-container");
+    var errorMessage = document.getElementById("error-message");
+    var textArea = document.getElementById("search_query");
+    var loadingContainer = document.getElementById("loading-container");
+    
+    if (searchQuery.trim() === "") {
+        errorContainer.style.display = "block";
+        errorMessage.style.display = "block";
+        return false; // Prevent form submission
+    } else {
+        errorContainer.style.display = "none";
+        errorMessage.style.display = "none";
+        textArea.readOnly = true; // Disable text area
+        loadingContainer.style.display = "block"; // Show loading spinner
+        return true; // Allow form submission
+    }
+}
+
+</script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Address:</h1>
+        <form method="POST" action="/show-image" onsubmit="return validateForm();">
+            <textarea id="search_query" name="search_query" rows="4"></textarea><br>
+            <div class="error-container" id="error-container">
+                <p class="error-message" id="error-message">Please enter an address.</p>
+            </div>
+            <div class="loading-container" id="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+        
+    </div>
+</body>
+</html>
