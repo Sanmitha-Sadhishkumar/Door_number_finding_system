@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> <!-- Add jQuery -->
+    <title>Address form</title>
+</head>
+<style>
+    @import 'https://fonts.googleapis.com/css?family=Dosis|Roboto:300,400';
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-image: url("https://i.pinimg.com/originals/89/b9/20/89b92062a297e4c79689dc30e47b9936.gif");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        font-family: 'Roboto', sans-serif; /* Set a default font */
+    }
+
+    #logo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        width: 94%;
+        display: block;
+    }
+
+    #error-message {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+        position: absolute;
+        width: 100%;
+        top: 90%;
+        left: 0;
+    }
+
+    #error-message p {
+        background-color: red;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .container {
+        position: absolute;
+        width: auto;
+        height: auto;
+        top: calc(50% - 240px);
+        left: calc(50% - 160px);
+    }
+
+    form {
+        position: absolute;
+        text-align: center;
+        background: #fff;
+        width: 310px;
+        height: 430px;
+        border-radius: 5px;
+        padding: 30px 20px 0 20px;
+        box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    p {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        text-transform: uppercase;
+        font-size: 16px;
+        color: #87613d;
+        margin-bottom: 20px;
+        margin-top: 40px;
+    }
+
+    p > span {
+        padding-top: 3px;
+        display: block;
+        font-weight: 400;
+        font-size: 9px;
+    }
+
+    h3 {
+        font-family: 'Dosis';
+        font-size: 35px;
+        text-transform: uppercase;
+        color: #87613d;
+        margin-bottom: 30px;
+    }
+
+    .logo-caption {
+        font-family: 'cursive';
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #87613d;
+        margin-bottom: 10px;
+    }
+
+    input,
+    button {
+        outline: none !important;
+    }
+
+    button.fb {
+        border: none;
+        background: #3b5998;
+        width: 160px;
+        height: 25px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+        border-radius: 4px;
+        border: 1px solid #29487d;
+        cursor: pointer;
+        margin-bottom: 20px;
+        transition: all 0.3s linear;
+    }
+
+    button.fb:hover {
+        background: #fff;
+        color: #3b5998;
+    }
+
+    button.form-btn {
+        position: absolute;
+        height: 60px;
+        width: 50%;
+        bottom: 0;
+        border: 0;
+        font-family: 'Dosis';
+        font-size: 24px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    button.form-btn.sx {
+        left: 0;
+        width: 50%;
+        border-radius: 0 0 0 5px;
+        background-color: rgba(255, 125, 0, 0.35);
+        color: #fff;
+        transition: all 0.3s linear;
+    }
+
+    button.form-btn.sxb {
+        left: 0;
+        width: 100%;
+        border-radius: 0 0 0 5px;
+        background-color: rgba(255, 125, 0, 0.35);
+        color: #fff;
+        transition: all 0.3s linear;
+    }
+
+    button.form-btn.sx:hover {
+        background-color: rgba(255, 125, 0, 0.65);
+        color: #fff;
+    }
+
+    button.form-btn.sx.back {
+        background-color: rgba(0, 0, 0, 0.15);
+        transition: all 0.3s linear;
+    }
+
+    button.form-btn.sx.back:hover {
+        background-color: rgba(0, 0, 0, 0.35);
+    }
+
+    button.form-btn.dx {
+        right: 0;
+        border-radius: 0 0 5px 0;
+        background-color: #ff7d00;
+        color: #fff;
+    }
+
+    .signUp .w100 {
+        width: 100%;
+    }
+
+    .signIn img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .signUp {
+        z-index: 3;
+    }
+
+    textarea {
+        border: 1px solid #ffc185;
+        width: 100%;
+        font-family: 'Roboto';
+        color: #ff7d00;
+        font-size: 16px;
+        padding: 10px;
+        resize: none;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+    }
+
+    textarea::placeholder {
+        color: #ffc185;
+        font-family: 'Roboto';
+        font-weight: 100;
+    }
+
+    textarea:focus {
+        border-color: #ff7d00;
+        box-shadow: 0 0 5px rgba(255, 125, 0, 0.5);
+    }
+
+    .home-link {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #FF7F27;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .home-link:hover {
+        background-color: #FF6425;
+    }
+
+    .loading-container {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .loading-spinner {
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-top: 3px solid #FF5733;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1.5s linear infinite;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .slider-container {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #ffc185;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease-in-out;
+    z-index: 2; 
+}
+
+#close-slider-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 3; 
+}
+
+.slider-content {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333; 
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+}
+
+#close-slider-button:hover {
+    color: #ff5733;
+}
+
+.slider-container {
+    transition: left 0.3s ease-in-out;
+}
+
+#open-slider-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#open-slider-button:hover {
+    color: #ff5733;
+}
+
+.slider-content img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
+}
+
+.slider-content button {
+        background-color: #ff5733; /* Button background color */
+        color: #fff; /* Button text color */
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .slider-content button:hover {
+        background-color: #ff7d00; /* Button background color on hover */
+    }
+
+</style>
+
+<script>
+function validateForm() {
+    var searchQuery = document.getElementById("search_query").value;
+    var errorContainer = document.getElementById("error-message");
+    var textArea = document.getElementById("search_query");
+    var loadingContainer = document.getElementById("loading-container");
+    
+    if (searchQuery.trim() === "") {
+        errorContainer.style.display = "block";
+        return false; // Prevent form submission
+    } else {
+        errorContainer.style.display = "none";
+        textArea.readOnly = true; // Disable text area
+        loadingContainer.style.display = "block"; // Show loading spinner
+        return true; // Allow form submission
+    }
+}
+</script>
+
+<body>
+	<a class="home-link" href="/">Go to Home</a>
+    <div id="open-slider-button">&#9776;</div>
+    <div class="container">
+        <form method="POST" action="/show-image" onsubmit="return validateForm();">
+            <img src="{{ url_for('static', filename='show/logo_crop.png')}}" alt="Your Logo" id="logo">
+            <br><br>
+            <p>Enter the Address : </p><br>
+            <textarea id="search_query" name="search_query" placeholder="Address" rows="6"></textarea>
+            <div id="error-message" style="display: none;">
+                <p>Please enter an address.</p>
+            </div>
+            <button class="form-btn sx log-in" type="submit">Search</button>
+            <button class="form-btn dx" type="reset">Clear</button>
+        <div id="loading-container" style="display: none;">
+                <div class="loading-spinner"></div>
+        </div>
+        </form>
+    </div>
+    <div class="slider-container">
+        <div id="close-slider-button">&#10006;</div>
+        <br><br><br>
+        <div class="slider-content">
+            <h2 id="title">{{title}}</h2>
+            <p id="para">{{para}}</p>
+            <img id = "imagename" src="https://i.pinimg.com/originals/71/3a/32/713a3272124cc57ba9e9fb7f59e9ab3b.gif" />
+            <button id="update-button">Next Step</button>
+            <input type = "hidden" id="index" value=0/>
+        </div>
+    </div>
+
+    <script>
+        function openSlider() {
+            var slider = document.querySelector(".slider-container");
+            slider.style.left = "0";
+        }
+
+        function closeSlider() {
+            var slider = document.querySelector(".slider-container");
+            slider.style.left = "-300px";
+        }
+
+        document.getElementById("open-slider-button").addEventListener("click", openSlider);
+        document.getElementById("close-slider-button").addEventListener("click", closeSlider);
+        var image_url = "{{ image_url }}"; 
+        $(document).ready(function () {
+        $('#update-button').click(function () {
+            $.ajax({
+                url: '/update-details',
+                method: 'POST',
+                success: function (data) {
+                    $('#title').text(data.title);
+                    $('#para').text(data.para);
+                    $('#imagename').attr('src', data.imagename);
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

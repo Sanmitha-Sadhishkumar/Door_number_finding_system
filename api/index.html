@@ -1,0 +1,42 @@
+<!--AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Street View</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <img id="streetViewImg" style="max-width: 100%; max-height: 100vh;">
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+    <script>
+        let currentHeadingIndex = 0;
+        const headings = [0, 90, 180, 270];
+        const streetViewImg = document.getElementById('streetViewImg');
+
+        function updateStreetViewImage() {
+            const heading = headings[currentHeadingIndex];
+            const location = { lat: 11.3278082, lng: 77.7107402 };
+            const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=800x600&location=${location.lat},${location.lng}&heading=${heading}&pitch=0&fov=120&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg`;
+            streetViewImg.src = streetViewUrl;
+        }
+
+        function moveForward() {
+            currentHeadingIndex = (currentHeadingIndex + 1) % headings.length;
+            updateStreetViewImage();
+        }
+
+        function moveBackward() {
+            currentHeadingIndex = (currentHeadingIndex - 1 + headings.length) % headings.length;
+            updateStreetViewImage();
+        }
+
+        // Start displaying the first image
+        updateStreetViewImage();
+
+        // Display the next image every 4 seconds
+        setInterval(moveForward, 4000);
+    </script>
+</body>
+</html>

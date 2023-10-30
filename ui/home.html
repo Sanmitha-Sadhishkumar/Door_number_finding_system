@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+    <title>Home</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .wrapper {
+        display: inline-block; /* Use flex layout to arrange logo and nav-area */
+        justify-content: space-between; /* Space elements evenly */
+        width:55%;
+    }
+
+    header {
+        background: url(https://img.freepik.com/premium-vector/simple-urban-architecture-minimalist-background-design_893012-35521.jpg);
+        height: 100vh;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+    }
+
+    .nav-area {
+        list-style: none;
+        margin-right: 20px;
+        flex:1;
+        display:inline-block;
+    }
+
+    .nav-area li {
+        display: inline-block;
+    }
+
+    .nav-area li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 25px;
+        font-family: 'Dosis', sans-serif;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+
+    .nav-area li a:hover {
+        background: #fff;
+        color: #333;
+    }
+
+    .logo {
+        display:inline-block;
+        width:40%;
+    }
+
+    .logo img {
+        width: 30%;
+        padding: 20px 20px;
+        display: inline-block;
+    }
+
+    .welcome-text {
+        position: absolute;
+        width: 600px;
+        height: 300px;
+        margin: 20% 30%;
+        text-align: center;
+    }
+
+    .welcome-text h1 {
+        text-align: center;
+        color: #fff;
+        text-transform: uppercase;
+        font-family: 'Dosis', sans-serif;
+        font-size: 60px;
+    }
+
+    .welcome-text a {
+        border: 1px solid #fff;
+        padding: 10px 25px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 14px;
+        margin-top: 20px;
+        display: inline-block;
+        background: #fff;
+        color: #FF7F27;
+    }
+
+    .welcome-text a:hover {
+        background: #fff;
+        color: #333;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 600px) {
+        .wrapper {
+            width: 70%;
+            display:inline-block;
+        }
+
+        .logo {
+            float: none;
+            width: 30%; /* Adjust the width as needed */
+            text-align: center;
+            margin: auto;
+            display:inline-block;
+        }
+
+        .logo img {
+            width: 30%; /* Adjust the width as needed */
+            display:inline-block;
+        }
+
+        .nav-area {
+            float: none;
+            margin-top: 0;
+        }
+
+        .nav-area li a {
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        .nav-area {
+            text-align: center;
+        }
+
+        .welcome-text {
+            width: 100%;
+            height: auto;
+            margin: 30% 0;
+        }
+
+        .welcome-text h1 {
+            font-size: 30px;
+        }
+    }
+
+    .slide-panel {
+            width: 300px; /* Set the width of the sliding panel */
+            position: fixed;
+            top: 0;
+            right: -3000px; /* Initially off-screen to the right */
+            height: 100%;
+            background: url(https://www.fabmood.com/wp-content/uploads/2021/04/orange-background-wallpaper-3.jpg); /* Vibrant background color */
+            transition: right 0.3s ease-in-out;
+            z-index: 1000; /* Ensure it appears on top */
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2); /* Add shadow to the left */
+            padding: 20px;
+            color: #fff; /* Text color */
+            font-family: Arial, sans-serif; /* Font family */
+        }
+
+        .open {
+            right: 0; /* Shift it into view */
+        }
+
+        /* Close button style */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff; /* Close button color */
+        }
+
+        /* Style for the details content */
+        .slide-panel h2 {
+            font-size: 24px; /* Header font size */
+            margin-bottom: 10px; /* Space between header and content */
+        }
+
+        .slide-panel p {
+            font-size: 16px; /* Content font size */
+            line-height: 1.5; /* Line height for better readability */
+        }
+
+        /* Add a colorful background to the close button */
+        .close-button {
+    background-color: #FF7F27; /* Match the slider background color */
+    color: #fff; /* Text color */
+    padding: 10px 15px; /* Adjust padding for better button appearance */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Add cursor pointer on hover */
+}
+
+/* Change the close button background on hover */
+.close-button:hover {
+    background-color: #FF6425; /* Lighter shade of the background color on hover */
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+}
+
+.team-member-image img {
+    width: 150px; /* Adjust the image width as needed */
+    height: 150px; /* Adjust the image height as needed */
+    border-radius: 50%; /* Make the image round */
+    margin-bottom: 10px;
+}
+
+.team-link {
+    color: #FF4606; /* Link color matching the background */
+    text-decoration: none; /* Remove underline */
+    margin-right: 10px; /* Add space between links */
+    font-weight: bold; /* Make links bold */
+    transition: color 0.3s; /* Add a smooth color transition on hover */
+}
+
+.team-link:hover {
+    color: #fff; /* Change font color on hover */
+}
+    /* Styles for the feedback form */
+    #feedback-form {
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        text-align: center;
+    }
+
+    #user-feedback {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 5px 0;
+        font-size: 16px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        resize: vertical;
+        text-align: center;
+        max-width: 100%; /* Prevents the textarea from exceeding the container */
+    }
+
+    #submit-feedback {
+        background-color: #FF7F27;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background-color 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    #submit-feedback:hover {
+        background-color: #FF6425;
+    }
+
+    .content {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+    }
+
+    #content2 {
+        color: #fff;
+        font-family: 'Arial', sans-serif;
+    }
+
+    #content4 {
+        text-align: center;
+        padding: 20px;
+    }
+
+</style>
+
+<body>
+    <header>
+        
+            <div class="logo">
+                <img src="{{ url_for('static', filename='show/logo_crop.png')}}" alt="logo">
+            </div>
+            <div class="wrapper">
+            <ul class="nav-area">
+                <li><a href="#" class="content-link" data-content="content1">About</a></li>
+                <li><a href="#" class="content-link" data-content="content2">Aim</a></li>
+                <li><a href="#" class="content-link" data-content="content3">Team</a></li>
+                <li><a href="#" class="content-link" data-content="content4">Contact</a></li>
+            </ul>
+        </div>
+        <div class="welcome-text">
+            <h1>Start Locating</h1>
+            <a id = "start" href="/ui">Start</a>
+        </div>
+    </header>
+    <div class="slide-panel">
+        <span class="close-button" id="close">Close</span>
+
+        <div id="content1" class="content" style="text-align: justify;">
+            <h2>About: </h2>
+            <p>Welcome to our innovative solution designed to address a common challenge faced by delivery professionals - the difficulty in locating specific addresses due to the absence of visible house numbers. Our project aims to simplify the identification process by providing a visual snapshot of houses based on their addresses, utilizing resources of Google Street View images. We offer an accurate representation of houses. Sometimes, the houses might not have a door number; in these cases, our app displays the road image where the house is located. Powered by Python, our project utilizes the Street View Static API and Geocoding API to ensure precise results. Our mission is to simplify the lives of both delivery professionals and recipients, ensuring that deliveries are made efficiently.</p>
+        </div>
+        
+
+        <div id="content2" class="content" style="color: #fff; font-family: 'Arial', sans-serif;">
+            <br><br><br><br>
+            <h2>Aim of Easy Locator:</h2><br>
+            <ul style="list-style-type: disc; margin-left: 20px; padding-left: 20px;">
+                <li style="margin-bottom: 20px;">To provide easy and effective location of a particular address</li>
+                <li style="margin-bottom: 20px;">To bridge the barrier gap between the common people and delivery agents</li>
+                <li style="margin-bottom: 20px;">To avoid the confusions in locating a location</li>
+                <li style="margin-bottom: 20px;">To provide an interactive and user-friendly user experience</li>
+                <li style="margin-bottom: 20px;">To avoid unnecessary calls between the customer and the delivery agent</li>
+            </ul>
+        </div>
+        
+        <div id="content3" class="content" style="color: #fff;font-family: 'Arial', sans-serif;">
+            <h2 style="font-size: 24px; margin-bottom: 10px;display:inline-block;">Our Team:</h2>
+            <div class="team-member">
+                <div class="team-member-image">
+                    <img src="{{ url_for('static', filename='show/team_member1.jpg')}}" alt="Team Member 1">
+                </div>
+                <p>Sanmitha V S (2021115092)</p>
+                <p>
+                    <a class="team-link" href="https://instagram.com/sanmitha_sadhishkumar?igshid=MzMyNGUyNmU2YQ==" target="_blank">Instagram</a>
+                </p>
+                <p>
+                    <a class="team-link" href="https://www.linkedin.com/in/sanmitha-sadhishkumar-20770a250/" target="_blank">LinkedIn</a>
+                </p>
+            </div>
+            <div class="team-member">
+                <div class="team-member-image">
+                    <img src="{{ url_for('static', filename='show/team_member2.jpeg')}}" alt="Team Member 2">
+                </div>
+                <p>Saravanan S (2021115094)</p>
+                <p>
+                    <a class="team-link" href="https://instagram.com/call_me_saran07?igshid=MzMyNGUyNmU2YQ==" target="_blank">Instagram</a>
+                </p>
+                <p>
+                    <a class="team-link" href="https://www.linkedin.com/in/saravanan-srinivasan-822214283/" target="_blank">LinkedIn</a>
+                </p>
+            </div>
+        </div>        
+        
+        
+        <br><br><br><div id="feedback-error" style="background-color: red; color:white;display: none;"></div>
+
+        <div id="content4" class="content">
+        <h2>Feedback:</h2>
+        <p>We value your feedback. Please provide your comments or suggestions below:</p>
+        <form id="feedback-form">
+        <textarea id="user-feedback" rows="10" cols="50" placeholder="Enter your feedback here"></textarea>
+        <br>
+        <input type="button" value="Submit Feedback" id="submit-feedback">
+        </form>
+        </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var submitButton = document.getElementById("submit-feedback");
+        var feedbackTextarea = document.getElementById("user-feedback");
+        var feedbackError = document.getElementById("feedback-error");
+
+        submitButton.addEventListener("click", function() {
+            var feedbackText = feedbackTextarea.value;
+            if (feedbackText.trim() === "") {
+                feedbackError.style.display = "block";
+                feedbackError.textContent = "Please enter feedback before submitting";
+            } else {
+                feedbackError.style.display = "none";
+
+                var emailSubject = "User Feedback";
+                var emailAddress = "summerproject62@email.com";
+                var mailtoLink = "mailto:" + emailAddress + "?subject=" + emailSubject + "&body=" + feedbackText;
+
+                window.location.href = mailtoLink;
+            }
+        });
+    });
+</script>
+
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var navLinks = document.querySelectorAll(".content-link");
+            var contentSections = document.querySelectorAll(".content");
+    
+            var slidePanel = document.querySelector(".slide-panel");
+    
+            var closeButton = document.getElementById("close");
+    
+            var mainContent = document.querySelector(".main-content");
+    
+            navLinks.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault(); 
+    
+                    contentSections.forEach(function(section) {
+                        section.style.display = "none";
+                    });
+    
+                    var contentId = link.getAttribute("data-content");
+                    document.getElementById(contentId).style.display = "block";
+    
+                    slidePanel.classList.add("open"); // Add the "open" class to slide in
+                    mainContent.style.marginRight = "300px"; // Adjust margin for main content
+                });
+            });
+    
+            closeButton.addEventListener("click", function() {
+                slidePanel.classList.remove("open"); 
+                mainContent.style.marginRight = "0"; 
+            });
+        });
+    </script>
+    
+</body>
+</html>
+
+</body>
+</html>
