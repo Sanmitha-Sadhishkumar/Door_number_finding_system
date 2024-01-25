@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+    <title>Address form</title>
+</head>
+<style>
+    @import 'https://fonts.googleapis.com/css?family=Dosis|Roboto:300,400';
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    background-image: url("https://i.pinimg.com/originals/89/b9/20/89b92062a297e4c79689dc30e47b9936.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container{
+	position:absolute;
+	width: auto;
+	height:auto;
+	top: calc(50% - 240px);
+	left: calc(50% - 160px);
+}
+
+form {
+	position: absolute;
+	text-align: center;
+	width: 410px;
+	height: 430px;
+	border-radius: 5px;
+	padding: 30px 20px 0 20px;
+	box-shadow: 0 10px 50px 0 rgba(0, 0, 0, 0.25);
+	box-sizing: border-box;
+}
+
+p {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	text-transform: uppercase;
+	font-size: 16px;
+	color: #87613d;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+p > span {
+	padding-top: 3px;
+	display: block;
+	font-weight: 400;
+	font-size: 9px;
+}
+
+h3 {
+	font-family: 'Dosis';
+	font-size: 35px;
+	text-transform: uppercase;
+	color: #87613d;
+	margin-bottom: 30px;
+}
+
+input,
+button{
+	outline: none !important; 
+}
+
+button.fb {
+	border: none;
+	background: #3b5998;
+	width: 160px;
+	height: 25px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	color: #fff;
+	text-transform: uppercase;
+	border-radius: 4px;
+	border: 1px solid #29487d;
+	cursor: pointer;
+	margin-bottom: 20px;
+	transition:all 0.3s linear;
+}
+button.fb:hover {
+	background: #fff;
+	color: #3b5998;
+}
+
+button.form-btn {
+	position: absolute;
+	font-family: 'Dosis';
+	font-size: 24px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+
+.form-btn.sxb.back {
+    position: absolute;
+    font-family: 'Dosis';
+    font-size: 16px; /* Adjust the font size as needed */
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #FF7F27;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left:10px;
+    padding: 10px 10px;
+    margin-top: 10px; /* Adjust the margin as needed */
+    transition: all 0.3s linear;
+}
+
+.form-btn.sxb.back:hover {
+    background-color: #FF6425;
+}
+
+
+.signIn {
+    width: 1000px;
+    height: 750px;
+    z-index: 1;
+    left: calc(50% - 230px);
+    top: calc(50% - 135px);
+    transform: perspective(100px) translate3d(0, 0, -30px); 
+}
+
+.signIn img {
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid #fff; /* Border color and thickness */
+    border-radius: 10px; /* Adjust the border-radius for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle shadow effect */
+    transition: transform 0.3s ease; /* Add transition for a smooth effect */
+}
+
+.signIn img:hover {
+    transform: scale(1.02); /* Scale up the image on hover */
+}
+
+
+.signIn {
+    z-index: 2; 
+}
+
+
+.home-link {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 16px;
+        font-family: 'Dosis';
+        text-decoration: none;
+        color: #fff;
+        background-color: #FF7F27;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .home-link:hover {
+        background-color: #FF6425;
+    }
+
+	.logo {
+        display:inline-block;
+        align-items: center; 
+    }
+
+    .logo img {
+        width: 30%;
+        padding: 20px 20px;
+        display: inline-block;
+    }
+
+	@media (max-width: 600px) {
+        .logo {
+            float: none;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+        }
+
+        .logo img {
+            width: 30%; 
+        }
+	}
+
+
+h2 {
+    font-size: 24px;
+    color: #333; 
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+}
+
+.image-container {
+        top: 0;
+        left: 0;
+        width: 20%; /* Adjust the width as needed */
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+.image-container img {
+    width: 100%;
+    height: 25%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 10px; /* Adjust the border-radius as needed for rounded corners */
+    border: 2px solid #fff; /* Border color and thickness */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle shadow effect */
+    transition: transform 0.3s ease; /* Add transition for a smooth effect */
+}
+
+.image-container img:hover {
+    transform: scale(1.05); /* Scale up the image on hover */
+}
+
+.image-label {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        border-radius: 5px;
+        text-align: center;
+        width: 80%;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+    
+    $(".form-btn.sxb.back").on("click", function () {
+        window.location.href = "/ui";
+    });
+});
+</script>
+
+<body>
+	<a class="home-link" href="/">Go to Home</a>
+    <button class="form-btn sxb back" type="button">&#60;- Back</button><br><br>
+    <div class="image-container">        
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image 1">
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image 2">
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image 3">
+    </div>
+    <div class="container">
+        <form class="signIn">
+            <p id="dynamic-content">{{text}}</p>
+            <!--<img id="dynamic-image" class="img-container" src="{{ url_for('static', filename=filename)}}" alt="Image Placeholder">-->
+            <img id="dynamic-image" class="img-container" src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="Image Placeholder">
+        </form>
+    </div>
+</body>
+</html>
